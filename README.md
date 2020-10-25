@@ -2,6 +2,10 @@
 
 A simple switch component with icons in the thumb.
 
+## Example
+
+![example](./assets/example.gif)
+
 ## Installation
 
 ```bash
