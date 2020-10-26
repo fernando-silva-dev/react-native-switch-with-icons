@@ -1,6 +1,6 @@
 {
   "name": "react-native-switch-with-icons",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple switch component with icons in the thumb.",
   "main": "index.js",
   "scripts": {
