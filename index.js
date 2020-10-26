@@ -51,10 +51,10 @@ export default class SwitchWithIcons extends Component {
 
     this._animatedValue.addListener(({ value }) => {
       if (
-        this.state.animationActive &&
+        this.state.pressIndicator &&
         (value === this._minAnimatedValue || value === this._maxAnimatedValue)
       ) {
-        this.setState({ animationActive: false });
+        this.setState({ pressIndicator: false });
       }
     });
   }
@@ -91,14 +91,14 @@ export default class SwitchWithIcons extends Component {
 
   _handlePress = () => {
     const newValue = !this.state.value;
-    this.setState({ animationActive: true });
+    this.setState({ pressIndicator: true });
     this.setValue(newValue);
   };
 
   state = {
     value: this.props.value ? true : false,
     disabled: this.props.disabled,
-    animationActive: false,
+    pressIndicator: false,
   };
 
   setValue = value => {
@@ -116,7 +116,7 @@ export default class SwitchWithIcons extends Component {
   };
 
   render() {
-    const { animationActive, disabled, value } = this.state;
+    const { pressIndicator, disabled, value } = this.state;
 
     const trackColor = disabled
       ? this._disabledTrackColor
@@ -164,7 +164,7 @@ export default class SwitchWithIcons extends Component {
             <Animated.View
               style={[{ backgroundColor: trackColor }, this._trackStyle]}
             />
-            {animationActive && (
+            {pressIndicator && (
               <Animated.View
                 style={[
                   styles.pressedIndicator,
