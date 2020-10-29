@@ -48,15 +48,6 @@ export default class SwitchWithIcons extends Component {
       borderRadius: this._thumbSize,
       top: 0 - this._thumbRadius,
     };
-
-    this._animatedValue.addListener(({ value }) => {
-      if (
-        this.state.pressIndicator &&
-        (value === this._minAnimatedValue || value === this._maxAnimatedValue)
-      ) {
-        this.setState({ pressIndicator: false });
-      }
-    });
   }
 
   _thumbColor = this.props.thumbColor || {
@@ -101,6 +92,21 @@ export default class SwitchWithIcons extends Component {
     pressIndicator: false,
   };
 
+  componentDidMount() {
+    this._listenerId = this._animatedValue.addListener(({ value }) => {
+      if (
+        this.state.pressIndicator &&
+        (value === this._minAnimatedValue || value === this._maxAnimatedValue)
+      ) {
+        this.setState({ pressIndicator: false });
+      }
+    });
+  }
+
+  componentWillUnmount() {
+    this._animatedValue.removeListener(this._listenerId);
+  }
+
   setValue = value => {
     const newValue = value ? true : false;
     this.setState({ value: newValue });
@@ -112,6 +118,7 @@ export default class SwitchWithIcons extends Component {
     Animated.timing(this._animatedValue, {
       toValue: newValue ? this._maxAnimatedValue : this._minAnimatedValue,
       duration: this._animationDuration,
+      useNativeDriver: false,
     }).start();
   };
 
