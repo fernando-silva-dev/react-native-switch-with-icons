@@ -6,8 +6,8 @@ import { styles } from "./styles";
 
 export default class SwitchWithIcons extends Component {
   constructor(props) {
-    const { style = {}, ...otherProps } = props;
-    super(otherProps);
+    const { style = {}} = props;
+    super(props);
     this._animatedValue = new Animated.Value(
       props.value ? this._maxAnimatedValue : this._minAnimatedValue,
     );
