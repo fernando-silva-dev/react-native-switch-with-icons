@@ -9,7 +9,7 @@ A simple switch component with icons in the thumb.
 ## Installation
 
 ```bash
-npm i react-native-switch-with-icons --save
+npm i react-native-switch-with-icons
 ```
 
 or
