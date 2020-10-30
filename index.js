@@ -19,13 +19,16 @@ export default class SwitchWithIcons extends Component {
   _animatedRange = [this._minAnimatedValue, this._maxAnimatedValue];
 
   _handlePress = () => {
-    const newValue = !this.state.value;
     this.setState({pressIndicator: true});
-    this.setValue(newValue);
+
+    const value = !this.props.value;
+
+    if (this.props.onValueChange) {
+      this.props.onValueChange(value);
+    }
   };
 
   state = {
-    value: this.props.value ? true : false,
     pressIndicator: false,
   };
 
@@ -44,20 +47,15 @@ export default class SwitchWithIcons extends Component {
     this._animatedValue.removeListener(this._listenerId);
   }
 
-  setValue = (value) => {
-    const newValue = value ? true : false;
-    this.setState({value: newValue});
-
-    if (this.props.onValueChange) {
-      this.props.onValueChange(newValue);
+  componentDidUpdate(prevProps) {
+    if (this.props.value !== prevProps.value) {
+      Animated.timing(this._animatedValue, {
+        toValue: this.props.value ? this._maxAnimatedValue : this._minAnimatedValue,
+        duration: this._animationDuration,
+        useNativeDriver: false,
+      }).start();
     }
-
-    Animated.timing(this._animatedValue, {
-      toValue: newValue ? this._maxAnimatedValue : this._minAnimatedValue,
-      duration: this._animationDuration,
-      useNativeDriver: false,
-    }).start();
-  };
+}
 
   render() {
     const {
@@ -70,12 +68,15 @@ export default class SwitchWithIcons extends Component {
       noIcon,
       iconColor,
       disabledIconColor,
-      disabledThumbColor
+      disabledThumbColor,
+      value,
     } = this.props;
+
+    console.log(value);
     
     const {height = 26, width = 52} = style;
 
-    const {pressIndicator, value} = this.state;
+    const {pressIndicator} = this.state;
 
     return (
       <View
@@ -99,7 +100,7 @@ export default class SwitchWithIcons extends Component {
               animatedValue={this._animatedValue}
               pressIndicator={pressIndicator}
               size={height}
-              value={value}
+              value={!!value}
               disabled={disabled}
               colors={thumbColor}
               width={width}
