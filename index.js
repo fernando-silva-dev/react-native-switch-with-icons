@@ -1,18 +1,19 @@
-import React, { Component } from "react";
-import { Animated, Image, TouchableWithoutFeedback, View } from "react-native";
-import ic_switch_on from "./img/SwitchOn.png";
-import ic_switch_off from "./img/SwitchOff.png";
-import { styles } from "./styles";
+import React, {Component} from 'react';
+import {Animated, TouchableWithoutFeedback, View} from 'react-native';
+import {styles} from './styles';
+import Thumb from './components/thumb';
+// import Track from './components/track';
 
 export default class SwitchWithIcons extends Component {
   constructor(props) {
-    const { style = {}} = props;
+    const {style = {}} = props;
     super(props);
+
     this._animatedValue = new Animated.Value(
       props.value ? this._maxAnimatedValue : this._minAnimatedValue,
     );
 
-    const { height = 26, width = 52, ...otherStyles } = style;
+    const {height = 26, width = 52, ...otherStyles} = style;
 
     this._containerStyle = otherStyles;
 
@@ -37,11 +38,6 @@ export default class SwitchWithIcons extends Component {
       margin: this._trackMargin,
     };
 
-    this._iconStyle = {
-      height: this._thumbRadius,
-      width: this._thumbRadius,
-    };
-
     this._pressedIndicatorStyle = {
       height: this._thumbSize * 2,
       width: this._thumbSize * 2,
@@ -50,29 +46,12 @@ export default class SwitchWithIcons extends Component {
     };
   }
 
-  _thumbColor = this.props.thumbColor || {
-    true: "rgb(52, 149, 235)",
-    false: "rgb(255, 255, 255)",
-  };
-
   _trackColor = this.props.trackColor || {
-    true: "rgb(144, 195, 240)",
-    false: "rgb(187, 194, 204)",
+    true: 'rgb(144, 195, 240)',
+    false: 'rgb(187, 194, 204)',
   };
 
-  _iconColor = this.props.iconColor || {
-    true: "#FFFFFF",
-    false: "#9499AD",
-  };
-
-  _icon = this.props.icon || {
-    true: ic_switch_on,
-    false: ic_switch_off,
-  };
-
-  _disabledThumbColor = this.props.disabledThumbColor || "#9499AD";
-  _disabledTrackColor = this.props.disabledTrackColor || "#BCBFC9";
-  _disabledIconColor = this.props.disabledIconColor || "#FFFFFF";
+  _disabledTrackColor = this.props.disabledTrackColor || '#BCBFC9';
 
   _animationDuration = this.props.animationDuration || 200;
 
@@ -82,7 +61,7 @@ export default class SwitchWithIcons extends Component {
 
   _handlePress = () => {
     const newValue = !this.state.value;
-    this.setState({ pressIndicator: true });
+    this.setState({pressIndicator: true});
     this.setValue(newValue);
   };
 
@@ -93,12 +72,12 @@ export default class SwitchWithIcons extends Component {
   };
 
   componentDidMount() {
-    this._listenerId = this._animatedValue.addListener(({ value }) => {
+    this._listenerId = this._animatedValue.addListener(({value}) => {
       if (
         this.state.pressIndicator &&
         (value === this._minAnimatedValue || value === this._maxAnimatedValue)
       ) {
-        this.setState({ pressIndicator: false });
+        this.setState({pressIndicator: false});
       }
     });
   }
@@ -107,9 +86,9 @@ export default class SwitchWithIcons extends Component {
     this._animatedValue.removeListener(this._listenerId);
   }
 
-  setValue = value => {
+  setValue = (value) => {
     const newValue = value ? true : false;
-    this.setState({ value: newValue });
+    this.setState({value: newValue});
 
     if (this.props.onValueChange) {
       this.props.onValueChange(newValue);
@@ -123,7 +102,7 @@ export default class SwitchWithIcons extends Component {
   };
 
   render() {
-    const { pressIndicator, disabled, value } = this.state;
+    const {pressIndicator, disabled, value} = this.state;
 
     const trackColor = disabled
       ? this._disabledTrackColor
@@ -131,18 +110,6 @@ export default class SwitchWithIcons extends Component {
           inputRange: this._animatedRange,
           outputRange: [this._trackColor.false, this._trackColor.true],
         });
-
-    const thumbColor = disabled
-      ? this._disabledThumbColor
-      : this._animatedValue.interpolate({
-          inputRange: this._animatedRange,
-          outputRange: [this._thumbColor.false, this._thumbColor.true],
-        });
-
-    const thumbPosition = this._animatedValue.interpolate({
-      inputRange: this._animatedRange,
-      outputRange: [0, this._totalWidth - this._thumbSize],
-    });
 
     const pressedIndicatorPosition = this._animatedValue.interpolate({
       inputRange: this._animatedRange,
@@ -152,24 +119,18 @@ export default class SwitchWithIcons extends Component {
       ],
     });
 
-    const iconColor = disabled
-      ? this._disabledIconColor
-      : this._iconColor[value];
-
     return (
       <View
         style={[
-          { height: this._totalHeight, width: this._totalWidth },
+          {height: this._totalHeight, width: this._totalWidth},
           this._containerStyle,
-        ]}
-      >
+        ]}>
         <TouchableWithoutFeedback
           disabled={disabled}
-          onPress={() => this._handlePress()}
-        >
+          onPress={() => this._handlePress()}>
           <View>
             <Animated.View
-              style={[{ backgroundColor: trackColor }, this._trackStyle]}
+              style={[{backgroundColor: trackColor}, this._trackStyle]}
             />
             {pressIndicator && (
               <Animated.View
@@ -177,30 +138,28 @@ export default class SwitchWithIcons extends Component {
                   styles.pressedIndicator,
                   this._pressedIndicatorStyle,
                   {
-                    backgroundColor: thumbColor,
+                    backgroundColor: "white", // TODO
                     left: pressedIndicatorPosition,
                   },
                 ]}
               />
             )}
-            <Animated.View
-              style={[
-                this._thumbStyle,
-                styles.thumb,
-                { backgroundColor: thumbColor, left: thumbPosition },
-              ]}
-            >
-              {this.props.noIcon || (
-                <Image
-                  source={this._icon[value]}
-                  style={[
-                    styles.icon,
-                    { tintColor: iconColor },
-                    this._iconStyle,
-                  ]}
-                />
-              )}
-            </Animated.View>
+            <Thumb
+              range={this._animatedRange}
+              animatedValue={this._animatedValue}
+              size={this._thumbSize}
+              value={value}
+              disabled={this.props.disabled}
+              colors={this.props.thumbColor}
+              width={this._totalWidth}
+              radius={this._thumbRadius}
+              icons={this.props.icon}
+              noIcon={this.props.noIcon}
+              iconColors={this.props.iconColor}
+              disabledColor={this.props.disabledThumbColor}
+              disabledIconColor={this.props.disabledIconColor}
+              iconSize={this._thumbRadius}
+            />
           </View>
         </TouchableWithoutFeedback>
       </View>
