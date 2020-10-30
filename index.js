@@ -72,8 +72,6 @@ export default class SwitchWithIcons extends Component {
       value,
     } = this.props;
 
-    console.log(value);
-    
     const {height = 26, width = 52} = style;
 
     const {pressIndicator} = this.state;
