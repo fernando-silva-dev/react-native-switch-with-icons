@@ -5,19 +5,11 @@ import Track from './components/track';
 
 export default class SwitchWithIcons extends Component {
   constructor(props) {
-    const {style = {}} = props;
     super(props);
-
+    
     this._animatedValue = new Animated.Value(
       props.value ? this._maxAnimatedValue : this._minAnimatedValue,
-    );
-
-    const {height = 26, width = 52} = style;
-
-    this._containerStyle = style;
-
-    this._totalHeight = height;
-    this._totalWidth = width;
+      );
   }
 
   _animationDuration = this.props.animationDuration || 200;
@@ -68,39 +60,54 @@ export default class SwitchWithIcons extends Component {
   };
 
   render() {
+    const {
+      style = {},
+      disabled,
+      disabledTrackColor,
+      trackColor,
+      thumbColor,
+      icon,
+      noIcon,
+      iconColor,
+      disabledIconColor,
+      disabledThumbColor
+    } = this.props;
+    
+    const {height = 26, width = 52} = style;
+
     const {pressIndicator, value} = this.state;
 
     return (
       <View
-        style={this._containerStyle}
+        style={style}
         >
         <TouchableWithoutFeedback
-          disabled={this.props.disabled}
-          onPress={() => this._handlePress()}>
+          disabled={disabled}
+          onPress={this._handlePress}>
           <View>
             <Track
               range={this._animatedRange}
               animatedValue={this._animatedValue}
-              disabled={this.props.disabled}
-              width={this._totalWidth}
-              height={this._totalHeight}
-              disabledColor={this.props.disabledTrackColor}
-              colors={this.props.trackColor}
+              disabled={disabled}
+              width={width}
+              height={height}
+              disabledColor={disabledTrackColor}
+              colors={trackColor}
             />
             <Thumb
               range={this._animatedRange}
               animatedValue={this._animatedValue}
               pressIndicator={pressIndicator}
-              size={this._totalHeight}
+              size={height}
               value={value}
-              disabled={this.props.disabled}
-              colors={this.props.thumbColor}
-              width={this._totalWidth}
-              icons={this.props.icon}
-              noIcon={this.props.noIcon}
-              iconColors={this.props.iconColor}
-              disabledColor={this.props.disabledThumbColor}
-              disabledIconColor={this.props.disabledIconColor}
+              disabled={disabled}
+              colors={thumbColor}
+              width={width}
+              icons={icon}
+              noIcon={noIcon}
+              iconColors={iconColor}
+              disabledColor={disabledThumbColor}
+              disabledIconColor={disabledIconColor}
             />
           </View>
         </TouchableWithoutFeedback>
