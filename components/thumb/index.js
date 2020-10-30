@@ -17,7 +17,6 @@ export default class Thumb extends Component {
       width,
       size,
       value,
-      radius,
       colors = {
         true: 'rgb(52, 149, 235)',
         false: 'rgb(255, 255, 255)',
@@ -26,14 +25,16 @@ export default class Thumb extends Component {
         true: ic_switch_on,
         false: ic_switch_off,
       },
-      noIcon = false,
       iconColors = {
         true: '#FFFFFF',
         false: '#9499AD',
       },
+      noIcon = false,
       disabledIconColor = '#FFFFFF',
       disabledColor = '#9499AD',
     } = this.props;
+
+    const radius = Math.round(size / 2);
 
     const color = disabled
     ? disabledColor
@@ -47,15 +48,39 @@ export default class Thumb extends Component {
         outputRange: [0, width - size],
     });
 
+    const pressedIndicatorPosition = animatedValue.interpolate({
+      inputRange: range,
+      outputRange: [
+        0 - radius,
+        width - radius - size,
+      ],
+    });
+
     const iconColor = disabled
       ? disabledIconColor
       : iconColors[value];
 
     return(
+      <>
+        {this.props.pressIndicator && (
+          <Animated.View
+            style={[
+              styles.pressedIndicator,
+              {
+                backgroundColor: color,
+                left: pressedIndicatorPosition,
+                width: size * 2,
+                borderRadius: size,
+                top: 0 - radius,
+                aspectRatio: 1,
+              },
+            ]}
+          />
+        )}
         <Animated.View
           style={[
             styles.thumb,
-            { backgroundColor: color, left: position, height: size, width: size, borderRadius: radius },
+            { backgroundColor: color, left: position, width: size, borderRadius: radius, aspectRatio: 1},
           ]}
         >
           {noIcon || (
@@ -63,11 +88,12 @@ export default class Thumb extends Component {
               source={icons[value]}
               style={[
                 styles.icon,
-                { tintColor: iconColor, height: radius, width: radius},
+                { tintColor: iconColor, width: '50%', aspectRatio: 1},
               ]}
             />
           )}
         </Animated.View>
+      </>
     );
   }
 }
