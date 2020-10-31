@@ -3,6 +3,7 @@
   "version": "2.0.1",
   "description": "A simple switch component with icons in the thumb.",
   "main": "index.js",
+  "types": "./index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
