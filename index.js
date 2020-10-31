@@ -48,7 +48,7 @@ export default class SwitchWithIcons extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.value !== prevProps.value) {
+    if (this.props.value !== prevProps.value || this.state.pressIndicator) {
       Animated.timing(this._animatedValue, {
         toValue: this.props.value ? this._maxAnimatedValue : this._minAnimatedValue,
         duration: this._animationDuration,
