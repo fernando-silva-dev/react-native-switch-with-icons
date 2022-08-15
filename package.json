@@ -1,11 +1,10 @@
 {
   "name": "react-native-switch-with-icons",
-  "version": "2.0.1",
+  "version": "3.0.0",
   "description": "A simple switch component with icons in the thumb.",
   "main": "index.js",
   "types": "index.d.ts",
-  "scripts": {
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/fernando-silva-dev/react-native-switch-with-icons.git"
