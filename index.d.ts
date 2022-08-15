@@ -1,31 +1,29 @@
-declare module "react-native-switch-with-icons" {
-    import { Component } from "react";
-    import {
-        ViewStyle
-    } from "react-native";
-  
-    export interface ISwitchableObject {
-        true: any,
-        false: any,
+import React from "react";
+import {
+    ViewStyle
+} from "react-native";
+
+declare module "react-native-switch-with-icons" {  
+    interface Switchable<T> {
+        true: T,
+        false: T,
     }
   
-    export interface ISwitchWithIconsProps {
+    interface SwitchWithIconsProps {
+        value: boolean,
+        onValueChange(value: boolean): void,
         animationDuration?: number,
         disabled?: boolean,
         disabledTrackColor?: string,
-        trackColor?: ISwitchableObject,
-        thumbColor?: ISwitchableObject,
-        iconColor?: ISwitchableObject,
-        icon?: ISwitchableObject,
+        trackColor?: Switchable<string>,
+        thumbColor?: Switchable<string>,
+        iconColor?: Switchable<string>,
+        icon?: Switchable<any>,
         noIcon?: boolean,
         disabledIconColor?: string,
         disabledThumbColor?: string,
-        value?: boolean,
-        style: ViewStyle,
-        onValueChange(value: boolean): void,
+        style?: ViewStyle,
     }
   
-    class SwitchWithIcons extends Component<ISwitchWithIconsProps> {}
-  
-    export default SwitchWithIcons;
+    export default class SwitchWithIcons extends React.Component<SwitchWithIconsProps>{}
   }
