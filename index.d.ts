@@ -4,9 +4,9 @@ import {
 } from "react-native";
 
 declare module "react-native-switch-with-icons" {  
-    interface Switchable<T> {
-        true: T,
-        false: T,
+    interface Switchable {
+        true: any,
+        false: any,
     }
   
     interface SwitchWithIconsProps {
@@ -15,10 +15,10 @@ declare module "react-native-switch-with-icons" {
         animationDuration?: number,
         disabled?: boolean,
         disabledTrackColor?: string,
-        trackColor?: Switchable<string>,
-        thumbColor?: Switchable<string>,
-        iconColor?: Switchable<string>,
-        icon?: Switchable<any>,
+        trackColor?: Switchable,
+        thumbColor?: Switchable,
+        iconColor?: Switchable,
+        icon?: Switchable,
         noIcon?: boolean,
         disabledIconColor?: string,
         disabledThumbColor?: string,
