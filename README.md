@@ -23,8 +23,11 @@ yarn add react-native-switch-with-icons
 ```js
 import SwitchWithIcons from "react-native-switch-with-icons";
 
+const [darkMode, setDarkMode] = useState(false);
+
 <SwitchWithIcons
-  onValueChange={value => console.log(`Value has been updated to ${value}`)}
+  value={darkMode}
+  onValueChange={setDarkMode}
 />
 ```
 
