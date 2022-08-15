@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {Animated, TouchableWithoutFeedback, View} from 'react-native';
 import Thumb from './components/thumb';
 import Track from './components/track';
 
-export default class SwitchWithIcons extends Component {
+export default class SwitchWithIcons extends React.Component {
   constructor(props) {
     super(props);
     
