@@ -2,7 +2,7 @@ import { fireEvent } from "@testing-library/react-native";
 import React from "react";
 import {TouchableWithoutFeedback} from "react-native";
 import renderer from "react-test-renderer";
-import SwitchWithIcons from "../";
+import SwitchWithIcons from "../index.js";
 
 it("renders", () => {
 	renderer.create(<SwitchWithIcons value={false} onValueChange={jest.fn(() => {})} />);
