@@ -4,7 +4,12 @@
   "description": "A simple switch component with icons in the thumb.",
   "main": "index.js",
   "types": "index.d.ts",
-  "scripts": {},
+  "scripts": {
+    "test": "jest"
+  },
+  "jest": {
+    "preset": "react-native"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/fernando-silva-dev/react-native-switch-with-icons.git"
@@ -18,5 +23,21 @@
   "bugs": {
     "url": "https://github.com/fernando-silva-dev/react-native-switch-with-icons/issues"
   },
-  "homepage": "https://github.com/fernando-silva-dev/react-native-switch-with-icons#readme"
+  "homepage": "https://github.com/fernando-silva-dev/react-native-switch-with-icons#readme",
+  "devDependencies": {
+    "@babel/core": "^7.18.10",
+    "@babel/preset-react": "^7.18.6",
+    "@babel/runtime": "^7.18.9",
+    "@testing-library/react-native": "^11.0.0",
+    "babel-jest": "^28.1.3",
+    "jest": "^28.1.3",
+    "metro-react-native-babel-preset": "^0.72.0",
+    "react": "^18.0.0",
+    "react-native": "^0.69.4",
+    "react-test-renderer": "^18.0.0"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*"
+  }
 }
