@@ -4,6 +4,8 @@ import {TouchableWithoutFeedback} from "react-native";
 import renderer from "react-test-renderer";
 import SwitchWithIcons from "../index.js";
 
+jest.useFakeTimers();
+
 it("renders", () => {
 	renderer.create(<SwitchWithIcons value={false} onValueChange={jest.fn(() => {})} />);
 });
