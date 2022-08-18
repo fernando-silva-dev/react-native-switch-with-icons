@@ -2,11 +2,11 @@
 
 A simple switch component with icons in the thumb.
 
-![GitHub branch checks state](https://github.com/fernando-silva-dev/react-native-switch-with-icons/actions/workflows/node.js.yml/badge.svg)
+<a href="https://github.com/fernando-silva-dev/react-native-switch-with-icons/actions/workflows/node.js.yml" target="_blank"><img alt="node CI" src="https://github.com/fernando-silva-dev/react-native-switch-with-icons/actions/workflows/node.js.yml/badge.svg"></a>
 <a href="https://www.npmjs.com/package/react-native-switch-with-icons" target="_blank"><img alt="npm" src="https://img.shields.io/npm/v/react-native-switch-with-icons"></a>
 ![npm](https://img.shields.io/npm/dw/react-native-switch-with-icons)
-![GitHub Repo stars](https://img.shields.io/github/stars/fernando-silva-dev/react-native-switch-with-icons)
-![GitHub issues](https://img.shields.io/github/issues/fernando-silva-dev/react-native-switch-with-icons)
+<a href="https://github.com/fernando-silva-dev/react-native-switch-with-icons/stargazers" target="_blank"><img alt="stars" src="https://img.shields.io/github/stars/fernando-silva-dev/react-native-switch-with-icons"></a>
+<a href="https://github.com/fernando-silva-dev/react-native-switch-with-icons/issues" target="_blank"><img alt="issues" src="https://img.shields.io/github/issues/fernando-silva-dev/react-native-switch-with-icons"></a>
 
 ## Example
 
